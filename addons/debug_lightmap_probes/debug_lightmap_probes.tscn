@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsgi168hxd4s2"]
+
+[ext_resource type="Script" path="res://addons/debug_lightmap_probes/debug_lightmap_probes.gd" id="1_agwc5"]
+[ext_resource type="Shader" path="res://addons/debug_lightmap_probes/wireframe.gdshader" id="1_lh7ba"]
+[ext_resource type="Script" path="res://addons/debug_lightmap_probes/tetrahedron.gd" id="2_57a85"]
+[ext_resource type="Script" path="res://addons/debug_lightmap_probes/probes.gd" id="3_cobgb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpex7"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q8gmd"]
+render_priority = 0
+shader = ExtResource("1_lh7ba")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+
+[node name="DebugLightmapProbes" type="Node3D"]
+script = ExtResource("1_agwc5")
+
+[node name="Tetrahedron" type="MeshInstance3D" parent="."]
+top_level = true
+material_override = SubResource("StandardMaterial3D_wpex7")
+material_overlay = SubResource("ShaderMaterial_q8gmd")
+cast_shadow = 0
+ignore_occlusion_culling = true
+gi_mode = 0
+script = ExtResource("2_57a85")
+
+[node name="Probes" type="MultiMeshInstance3D" parent="."]
+top_level = true
+cast_shadow = 0
+gi_mode = 0
+script = ExtResource("3_cobgb")
