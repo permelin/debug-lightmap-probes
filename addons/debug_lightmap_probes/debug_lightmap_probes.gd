@@ -23,7 +23,7 @@ extends Node3D
 @export var sweep_now: bool = false:
 	set(v):
 		sweep_now = v
-		if sweep_now and !sweeping:
+		if sweep_now and !sweeping and lm_node:
 			await get_tree().process_frame
 			sweep()
 
