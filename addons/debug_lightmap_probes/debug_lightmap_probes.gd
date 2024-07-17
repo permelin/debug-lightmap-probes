@@ -111,15 +111,6 @@ func _read_lightmap_data() -> void:
 	for point in points:
 		bounds = bounds.expand(lm_node.global_transform * point)
 
-	# I normally run a version of Godot that doesn't automatically place probes
-	# at the bounds if probe generation is disabled, so I need to do this extra
-	# step to ensure everything is covered.
-	for i in lm_node.light_data.get_user_count():
-		# A "user" is any static object that has light baked by the lightmap.
-		var user: VisualInstance3D = lm_node.get_node_or_null(lm_node.light_data.get_user_path(i))
-		if user:
-			bounds = bounds.merge(user.global_transform * user.get_aabb())
-
 
 ## Godot plugin custom types and named classes can't be scenes. This is
 ## a workaround. It will load a scene with the same path and basename as this
