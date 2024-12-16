@@ -10,7 +10,7 @@ func draw_probes(lm_node: LightmapGI, points: PackedVector3Array) -> void:
 	for i in points.size():
 		# Probes are positioned relative to the LightmapGI node. This node
 		# is top level, so we don't have to compensate for our own position.
-		multimesh.set_instance_transform(i, lm_node.global_transform.translated(points[i]))
+		multimesh.set_instance_transform(i, lm_node.global_transform.translated_local(points[i]))
 
 
 func _init_mesh() -> void:
